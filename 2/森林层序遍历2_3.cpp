@@ -1,3 +1,37 @@
+/*
+7-2 森林的层次遍历
+分数 100
+作者 谷方明
+单位 吉林大学
+给定一个森林F，求F的层次遍历序列。森林由其先根序列及序列中每个结点的度给出。
+
+输入格式:
+第1行，1个整数n，表示森林的结点个数， 1≤n≤100000.
+
+第2行，n个字符，用空格分隔，表示森林F的先根序列。字符为大小写字母及数字。
+
+第3行，n个整数，用空格分隔，表示森林F的先根序列中每个结点对应的度。
+
+输出格式:
+1行，n个字符，用空格分隔，表示森林F的层次遍历序列。
+
+输入样例:
+在这里给出一组输入。例如：
+
+14
+A B C D E F G H I J K L M N
+4 0 3 0 0 0 0 2 2 0 0 0 1 0
+输出样例:
+在这里给出相应的输出。例如：
+
+A M B C G H N D E F I L J K
+代码长度限制
+16 KB
+时间限制
+100 ms
+内存限制
+5 MB
+*/
 #include<iostream>
 #include<vector>
 
@@ -15,12 +49,12 @@ TreeNode** root;
 TreeNode* Prebuild(char* pre, int* cnt, int& i) {
 	TreeNode* p = new TreeNode;
 	p->Firstchild = NULL;
-	p->NextBrother = NULL;//��ʼ���� 
+	p->NextBrother = NULL;//³õÊ¼»¯¸ù 
 	TreeNode* root = p;
 	int t = i;
 	p->ch = pre[i++];
-	for (int k = 0; k < cnt[t]; k++) {//���Ӷ���
-		TreeNode* Nchild = Prebuild(pre, cnt, i);//�������� 
+	for (int k = 0; k < cnt[t]; k++) {//Á´½Ó¶ù×Ó
+		TreeNode* Nchild = Prebuild(pre, cnt, i);//½¨Á¢¶ù×Ó 
 		if (k == 0)p->Firstchild = Nchild;
 		else p->NextBrother = Nchild;
 		p = Nchild;
