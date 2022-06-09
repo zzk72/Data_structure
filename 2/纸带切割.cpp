@@ -1,137 +1,39 @@
-//#pragma once
-//#include<iostream>
-//using namespace std;
-//typedef struct haff {
-//	long long weight;
-//	struct haff* left, * right;
-//
-//}Haff;
-//
-//class Haff_heap {
-//public:	
-//	int len;
-//	Haff** H;
-//	void down(int i);
-//	void up(int i);
-//	void swap(Haff*& x, Haff*& y) { Haff* t; t = x; x = y; y = t; }
-//
-//	Haff* front(void) { return H[1]; }
-//	int size(void) { return len; };
-//	void set(long long* a,int n);
-//	void buildheap(void);
-//	Haff* pop(void);
-//	void insert(Haff*);
-//	void levelorder(void);
-//};
-//
-//Haff* Haff_heap::pop(void) {
-//	if (len < 1)return NULL;
-//	Haff* tmp = H[1];
-//	swap(H[1], H[len]);
-//	len--;
-//	down(1);
-//	return tmp;
-//}
-//
-//void Haff_heap::insert(Haff* t) {
-//	H[++len] = t;
-//	up(len);
-//}
-//
-//void Haff_heap::up(int p) {
-//	while (p > 1 && H[p]->weight < H[p / 2]->weight) {
-//		swap(H[p], H[p / 2]);
-//		p /= 2;
-//	}
-//}
-//
-//void Haff_heap::down(int p) {//�³�a[p] 
-//	while (p <= len / 2) {
-//		int y = 2 * p;
-//		if (y<len/*�жϣ�ֻҪy<len,����y+1<=len*/ && H[2 * p]->weight>H[2 * p + 1]->weight) {
-//			y++;
-//		}
-//		if (H[y]->weight < H[p]->weight) {
-//			swap(H[y], H[p]);
-//			p = y;
-//		}
-//		else break;
-//	}
-//}
-//void Haff_heap::set(long long* a,int n)
-//{
-//	len = n;
-//	H = new Haff * [n + 1];
-//	for (int i = 0; i <= len; i++) {
-//		H[i] = new Haff;
-//		H[i]->weight = a[i];
-//		H[i]->left = NULL;
-//		H[i]->right = NULL;
-//	}
-//	buildheap();
-//}
-//void Haff_heap::buildheap() {
-//	for (int i = len / 2; i >= 1; i--) {
-//		down(i);
-//	}
-//}
-//
-//Haff* HAFFMANTREE(class Haff_heap& heap) {
-//	while (heap.size() > 1) {
-//		Haff* t1, * t2, * t = new haff;//�м��м�һ��Ҫ���������µĿռ䣬����Ḳ�ǵ�֮ǰ�� 
-//		t1 = heap.pop();
-//		t2 = heap.pop();
-//		if (!t1 || !t2) { cout << "���ѿ�" << endl; return NULL; }
-//		t->weight = t1->weight + t2->weight;
-//		t->left = t1; t->right = t2;
-//		heap.insert(t);
-//	}
-//	return heap.front();
-//}
-//
-//void Haff_heap::levelorder(void) {
-//	Haff* root = H[1];
-//	Haff** Q=new Haff*[len+5], * tmp = NULL;
-//	int f = 0, r = 0, cnt = 0;
-//
-//	Q[r++] = root;
-//     cnt++;
-//	 r %= len;
-//	while (cnt != 0) {
-//		tmp = Q[f++];
-//		f %= len;
-//		cnt--;
-//		if (tmp) {
-//			printf("%lld ", tmp->weight);
-//			if (tmp->left) {
-//				Q[r++] = tmp->left;
-//				r %= len;
-//				cnt++;
-//			}
-//			if (tmp->right) {
-//				Q[r++] = tmp->right;
-//				r %= len;
-//				cnt++;
-//			}
-//		}
-//	}
-//
-//}
-//
-//int main() {
-//	Haff_heap tree;
-//	int n;
-//	scanf("%d", &n);
-//	long long* a = new long long[n + 1]{0};
-//	for (int i = 1; i <= n; i++) {
-//		scanf("%lld", &a[i]);
-//	}
-//	tree.set(a, n);
-//	HAFFMANTREE(tree);
-//	for (int i = 1; i < n; i++) {
-//		cout << tree.H[i]->weight << " ";
-//	}
-//}
+/*
+7-3 纸带切割
+分数 100
+作者 谷方明
+单位 吉林大学
+有一条细长的纸带,长度为 L 个单位，宽度为一个单位。现在要将纸带切割成 n 段。每次切割把当前纸带分成两段，切割位置都在整数单位上，切割代价是当前切割纸带的总长度。每次切割都选择未达最终要求的最长纸带切割，若这样的纸带有多条，则任选一条切割。如何切割，才能完成任务，并且总代价最小。
+
+输入格式:
+第1行，1个整数n，表示切割成的段数， 1≤n≤100000.
+
+第2行，n个整数Li，用空格分隔，表示要切割成的各段的长度，1≤Li≤200000000，1≤i≤n.
+
+输出格式:
+第1行，1个整数，表示最小的总代价。
+
+第2行，若干个整数，用空格分隔，表示总代价最小时每次切割的代价。
+
+输入样例:
+在这里给出一组输入。例如：
+
+5
+5 6 7 2 4
+输出样例:
+在这里给出相应的输出。例如：
+
+54
+24 13 11 6
+代码长度限制
+16 KB
+时间限制
+100 ms
+内存限制
+5 MB
+*/
+
+
 #include<iostream>
 #include<queue>
 #include<algorithm>
@@ -147,24 +49,24 @@ inline ll read() {
 		ch = getchar();
 	}
 	while (isdigit(ch)) {
-		x = (x << 3) + (x << 1)/* x*10 */ + (ch ^ 48)/*��x-48 */;
+		x = (x << 3) + (x << 1)/* x*10 */ + (ch ^ 48)/*即x-48 */;
 		ch = getchar();
 	}
 	return f * x;
-}//������� ������cin����scanf
+}//快读数字 可以用cin或者scanf
 int main() {
-	priority_queue<ll, vector<ll>, greater<ll> > q;//�����������
+	priority_queue<ll, vector<ll>, greater<ll> > q;//优先升序队列
 	n = read();
 	for (int i = 1; i <= n; i++) {
-		t = read();//����Ϊʲô����һ����������⣬��Ϊ1e6�о���mle
+		t = read();//关于为什么不开一个数组的问题，因为1e6感觉会mle
 		q.push(t);
 	}
 
 	for (int i = 1; i < n; i++) {
 		int m = q.top(); q.pop();
-		int n = q.top(); q.pop();//������ ÿ�ζ�ȡ��Сֵ
+		int n = q.top(); q.pop();//这两段 每次都取最小值
 		q.push(m + n);
-		ans[i] = m + n;//�� ���Բο������ͼ Ҳ����ĸ���ĳ���
+		ans[i] = m + n;//根 可以参考上面的图 也就是母带的长度
 	}
 
 	long long res = 0;
